@@ -9,4 +9,16 @@ export class EquipmentService {
   getEquipmentByID(equipmentID: number) {
     return `Equipment ${equipmentID}`;
   }
+
+  createEquipment(body: any) {
+    return body;
+  }
+
+  updateEquipment(equipmentID: number, body: any) {
+    return { equipmentID, body };
+  }
+
+  deleteEquipment(equipmentID: number) {
+    return `Delete ${equipmentID}`;
+  }
 }

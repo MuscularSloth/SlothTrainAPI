@@ -1,0 +1,22 @@
+{
+  "equipments": [
+    {
+      "id": 1,
+      "name": "bodyweight",
+      "description": "bodyweight description",
+      "image": "http://imagebodyweight"
+    },
+    {
+      "id": 2,
+      "name": "dumbbells",
+      "description": "dumbbells description",
+      "image": "http://imagedumbbells"
+    },
+    {
+      "id": 3,
+      "name": "barbell",
+      "description": "barbell description",
+      "image": "http://imagebarbell"
+    }
+  ]
+}
