@@ -1,3 +1,5 @@
+import { UpdateEquipmentDto } from './dto/update-equipment.dto';
+import { CreateEquipmentDto } from './dto/create-equipment.dto';
 import { EquipmentService } from './equipment.service';
 import {
   Controller,
@@ -7,6 +9,7 @@ import {
   Post,
   Patch,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 
 @Controller('equipment')
@@ -14,27 +17,33 @@ export class EquipmentController {
   constructor(private equipmentService: EquipmentService) {}
 
   @Get()
-  getExercises() {
+  getEquipments() {
     return this.equipmentService.getAll();
   }
 
   @Get('/:equipmentID')
-  getSingleExercise(@Param() params: { equipmentID: number }) {
-    return this.equipmentService.getEquipmentByID(params.equipmentID);
+  getSingleEquipment(@Param('equipmentID', ParseIntPipe) equipmentID: number) {
+    return this.equipmentService.getEquipmentByID(equipmentID);
   }
 
   @Post()
-  createMuscle(@Body() body: any) {
-    return this.equipmentService.createEquipment(body);
+  createEquipment(@Body() createEquipmentDto: CreateEquipmentDto) {
+    return this.equipmentService.createEquipment(createEquipmentDto);
   }
 
   @Patch('/:equipmentID')
-  updateMuscle(@Param() params: { equipmentID: number }, @Body() body: any) {
-    return this.equipmentService.updateEquipment(params.equipmentID, body);
+  updateEquipment(
+    @Param('equipmentID', ParseIntPipe) equipmentID: number,
+    @Body() updateEquipmentDto: UpdateEquipmentDto,
+  ) {
+    return this.equipmentService.updateEquipment(
+      equipmentID,
+      updateEquipmentDto,
+    );
   }
 
   @Delete('/:equipmentID')
-  deleteMuscle(@Param() params: { equipmentID: number }) {
-    return this.equipmentService.deleteEquipment(params.equipmentID);
+  deleteEquipment(@Param('equipmentID', ParseIntPipe) equipmentID: number) {
+    return this.equipmentService.deleteEquipment(equipmentID);
   }
 }

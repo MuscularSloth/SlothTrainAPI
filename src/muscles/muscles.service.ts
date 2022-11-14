@@ -1,3 +1,5 @@
+import { UpdateMuscleDto } from './dto/update-muscle.dto';
+import { CreateMuscleDto } from './dto/create-muscle.dto';
 import { Injectable } from '@nestjs/common';
 // import exampleOfAllMuscles from '../../json-examples/getAllMuscles.json';
 
@@ -16,12 +18,12 @@ export class MusclesService {
     return result;
   }
 
-  createMuscle(body: any) {
-    return body;
+  createMuscle(createMuscleDto: CreateMuscleDto) {
+    return createMuscleDto;
   }
 
-  updateMuscle(muscleID: number, body: any) {
-    return { muscleID, body };
+  updateMuscle(muscleID: number, updateMuscleDto: UpdateMuscleDto) {
+    return { muscleID, updateMuscleDto };
   }
 
   deleteMuscle(muscleID: number) {

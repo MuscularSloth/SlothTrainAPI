@@ -1,3 +1,5 @@
+import { UpdateExerciseDto } from './dto/update-exercise.dto';
+import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { ExercisesService } from './exercises.service';
 import {
   Controller,
@@ -7,6 +9,7 @@ import {
   Post,
   Patch,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 
 @Controller('exercises')
@@ -19,22 +22,25 @@ export class ExercisesController {
   }
 
   @Get('/:exercisesID')
-  getSingleExercise(@Param() params: { exercisesID: number }) {
-    return this.exercisesService.getExerciseByID(params.exercisesID);
+  getSingleExercise(@Param('exercisesID', ParseIntPipe) exercisesID: number) {
+    return this.exercisesService.getExerciseByID(exercisesID);
   }
 
   @Post()
-  createMuscle(@Body() body: any) {
-    return this.exercisesService.createExercise(body);
+  createExercise(@Body() createExerciseDto: CreateExerciseDto) {
+    return this.exercisesService.createExercise(createExerciseDto);
   }
 
   @Patch('/:exercisesID')
-  updateMuscle(@Param() params: { exercisesID: number }, @Body() body: any) {
-    return this.exercisesService.updateExercise(params.exercisesID, body);
+  updateExercise(
+    @Param('exercisesID', ParseIntPipe) exercisesID: number,
+    @Body() updateExerciseDto: UpdateExerciseDto,
+  ) {
+    return this.exercisesService.updateExercise(exercisesID, updateExerciseDto);
   }
 
   @Delete('/:exercisesID')
-  deleteMuscle(@Param() params: { exercisesID: number }) {
-    return this.exercisesService.deleteExercise(params.exercisesID);
+  deleteExercise(@Param('exercisesID', ParseIntPipe) exercisesID: number) {
+    return this.exercisesService.deleteExercise(exercisesID);
   }
 }
