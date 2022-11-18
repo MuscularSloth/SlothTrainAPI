@@ -1,3 +1,5 @@
+import { Muscle } from './../muscles/entity/muscle.entity';
+import { Equipment } from './../equipment/entity/equipment.entity';
 import { Exercise } from './entity/exercise.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
@@ -7,6 +9,6 @@ import { ExercisesService } from './exercises.service';
 @Module({
   controllers: [ExercisesController],
   providers: [ExercisesService],
-  imports: [TypeOrmModule.forFeature([Exercise])],
+  imports: [TypeOrmModule.forFeature([Exercise, Equipment, Muscle])],
 })
 export class ExercisesModule {}

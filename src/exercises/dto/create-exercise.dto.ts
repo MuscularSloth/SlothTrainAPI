@@ -10,4 +10,12 @@ export class CreateExerciseDto {
   @IsOptional()
   @IsString()
   image: string;
+  @IsOptional()
+  equipment: number[];
+  @IsOptional()
+  muscleMain: number[];
+  @IsOptional()
+  muscleAdditional: number[];
+  @IsOptional()
+  alternativeExercises: number[];
 }

@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Exercise } from './../../exercises/entity/exercise.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 
-@Entity()
+@Entity('muscles')
 export class Muscle {
   @PrimaryGeneratedColumn()
   id: number;
@@ -8,9 +9,15 @@ export class Muscle {
   @Column()
   name: string;
 
-  @Column('text')
+  @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column()
+  @Column({ nullable: true })
   image: string;
+
+  // @ManyToMany(() => Exercise, (exercise) => exercise.muscleMain)
+  // exercisesMain: Exercise[];
+
+  // @ManyToMany(() => Exercise, (exercise) => exercise.muscleAdditional)
+  // exercisesAdditional: Exercise[];
 }
