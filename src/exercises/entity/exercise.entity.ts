@@ -28,15 +28,27 @@ export class Exercise {
   @Column({ type: 'boolean', default: false })
   isIsolation: boolean;
 
-  @ManyToMany(() => Equipment, (equipment) => equipment.exercises)
+  @ManyToMany(() => Equipment, {
+    cascade: true,
+  })
   @JoinTable()
   equipment: Equipment[];
 
-  // @ManyToMany(() => Muscle, (muscle) => muscle.exercisesMain)
-  // muscleMain: Muscle[];
+  @ManyToMany(() => Muscle, {
+    cascade: true,
+  })
+  @JoinTable()
+  muscleMain: Muscle[];
 
-  // @ManyToMany(() => Muscle, (muscle) => muscle.exercisesAdditional)
-  // muscleAdditional: Muscle[];
+  @ManyToMany(() => Muscle, {
+    cascade: true,
+  })
+  @JoinTable()
+  muscleAdditional: Muscle[];
 
-  // alternativeExercises: Exercise[];
+  @ManyToMany(() => Exercise, {
+    cascade: true,
+  })
+  @JoinTable()
+  alternativeExercises: Exercise[];
 }

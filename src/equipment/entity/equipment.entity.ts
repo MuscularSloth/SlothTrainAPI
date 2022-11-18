@@ -1,11 +1,5 @@
 import { Exercise } from './../../exercises/entity/exercise.entity';
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 
 @Entity('equipments')
 export class Equipment {
@@ -21,6 +15,6 @@ export class Equipment {
   @Column({ nullable: true })
   image: string;
 
-  @ManyToMany(() => Exercise, (exercise) => exercise.equipment)
-  exercises: Exercise[];
+  // @ManyToMany(() => Exercise, (exercise) => exercise.equipment)
+  // exercises: Exercise[];
 }
