@@ -1,3 +1,4 @@
+import { Equipment } from './../../equipment/entity/equipment.entity';
 import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 
 export class UpdateExerciseDto {
@@ -10,4 +11,6 @@ export class UpdateExerciseDto {
   @IsOptional()
   @IsString()
   image: string;
+  @IsOptional()
+  equipment: Equipment[];
 }

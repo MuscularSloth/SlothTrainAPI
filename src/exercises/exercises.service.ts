@@ -1,3 +1,4 @@
+import { Equipment } from './../equipment/entity/equipment.entity';
 import { UpdateExerciseDto } from './dto/update-exercise.dto';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { Exercise } from './entity/exercise.entity';
@@ -10,10 +11,19 @@ export class ExercisesService {
   constructor(
     @InjectRepository(Exercise)
     private exerciseRepository: Repository<Exercise>,
+    @InjectRepository(Equipment)
+    private equipmentRepository: Repository<Equipment>,
   ) {}
 
   getAll(): Promise<Exercise[]> {
-    return this.exerciseRepository.find();
+    return this.exerciseRepository.find({
+      relations: [
+        'equipment',
+        // 'muscleMain',
+        // 'muscleAdditional',
+        // 'alternativeExercises',
+      ],
+    });
   }
 
   getExerciseByID(exercisesID: number): Promise<Exercise> {
@@ -21,7 +31,18 @@ export class ExercisesService {
   }
 
   createExercise(createExerciseDto: CreateExerciseDto): Promise<Exercise> {
-    return this.exerciseRepository.save(createExerciseDto);
+    const newExercise = this.exerciseRepository.create(createExerciseDto);
+    // const exerciseEquipments = equipment.map(
+    //   async (equipmentId) =>
+    //     !Number.isNaN(equipmentId) &&
+    //     (await this.equipmentRepository.findOne({
+    //       where: { id: equipmentId.id },
+    //     })),
+    // );
+    // console.log('equipment >>> ', equipment);
+
+    // newExercise.equipment = equipment;
+    return this.exerciseRepository.save(newExercise);
   }
 
   updateExercise(
